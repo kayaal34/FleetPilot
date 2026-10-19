@@ -10,6 +10,7 @@ All notable changes to FleetPilot are recorded here. Version numbers follow [sem
 
 ### Fixed
 
+- Email notifications work with port 465 (SSL): FleetPilot now connects with implicit TLS there instead of STARTTLS. SMTP connections time out after 20 seconds instead of hanging on a wrong server or port, and are closed when sending fails.
 - **Example dashboard widget and `dashboard_widget` hook receive host reachability counts** ([#144](https://github.com/ChristianHandy/FleetPilot/issues/144)). `templates/index.html` passed raw host dicts without a `status` key and `stats={}`, so `addons/example_dashboard_widget.py` always reported 0% Fleet Health with every host offline. Each host passed to `dashboard_widget` now includes `name` and `status` (`"online"`, `"offline"` or `"unknown"`) from the last capability check, `stats` provides `{"total", "online", "offline", "unknown"}`, and unchecked hosts are shown as unknown rather than offline.
 
 ## [1.8.0] — 2026-10-18
